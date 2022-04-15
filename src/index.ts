@@ -1,10 +1,15 @@
+import 'reflect-metadata';
+import { createConnection, getConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import { app } from './app';
+import { AlumnosRouter } from './routes/alumno.router';
 
 dotenv.config();
 
-app.get('/users', (req, res) => {
-  res.send({message: 'Hello'}).status(200);
+getConnectionOptions().then(connectionOptions => {
+  createConnection(connectionOptions).then(() => {
+    app.use(AlumnosRouter().router);
+  });
 });
 
 app.listen(process.env.SERVER_PORT, () => {
