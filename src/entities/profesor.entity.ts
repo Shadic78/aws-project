@@ -1,9 +1,12 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
-@Entity({name: 'Alumnos'})
-export class Alumno {
+@Entity({name: 'Profesores'})
+export class Profesor {
   @PrimaryColumn()
   id: number;
+
+  @Column()
+  numeroEmpleado: number;
 
   @Column()
   nombres: string;
@@ -12,9 +15,6 @@ export class Alumno {
   apellidos: string;
 
   @Column()
-  matricula: string;
-
-  @Column()
-  promedio: number;
+  horasClase: number;
 
 }

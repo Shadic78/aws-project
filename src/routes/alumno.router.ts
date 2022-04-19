@@ -1,10 +1,15 @@
 import express from 'express';
-import { getAlumnos } from '../services/alumno.service';
+import { getAlumnos } from '../controllers/alumno.controller';
 
-export const AlumnosRouter = () => {
+/*export const AlumnosRouter = () => {
   const router = express.Router();
 
   router.get('/alumnos', getAlumnos);
 
   return { router };
-};
+};*/
+const alumnosRouter = express.Router();
+
+alumnosRouter.get('/alumnos', getAlumnos);
+
+export { alumnosRouter };
