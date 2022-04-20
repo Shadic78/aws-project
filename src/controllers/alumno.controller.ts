@@ -71,6 +71,6 @@ export class AlumnoController {
 
   unsupportedMethod = async (req: Request, res: Response) => {
     return res.status(405).json({error: 'Unsupported method'});
-  }
+  };
 
 }

@@ -17,9 +17,9 @@ export class Alumno extends BaseEntity {
   @Column()
   promedio: number;
 
-  constructor(user?: Partial<User>) {
+  constructor(alumno?: Partial<Alumno>) {
     super();
-    Object.assign(this, user);
+    Object.assign(this, alumno);
   }
 
 }
