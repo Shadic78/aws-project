@@ -2,13 +2,13 @@ import 'reflect-metadata';
 import { createConnection, getConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import { app } from './app';
-import { alumnosRouter } from './routes/alumno.router';
+import { AlumnosRouter } from './routes/alumno.router';
 
 dotenv.config();
 
 getConnectionOptions().then(connectionOptions => {
   createConnection(connectionOptions).then(() => {
-    app.use(alumnosRouter);
+    app.use(AlumnosRouter().router);
   });
 });
 

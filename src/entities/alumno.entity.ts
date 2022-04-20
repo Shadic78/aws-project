@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, BaseEntity } from 'typeorm';
 
 @Entity({name: 'Alumnos'})
-export class Alumno {
+export class Alumno extends BaseEntity {
   @PrimaryColumn()
   id: number;
 
@@ -16,5 +16,10 @@ export class Alumno {
 
   @Column()
   promedio: number;
+
+  constructor(user?: Partial<User>) {
+    super();
+    Object.assign(this, user);
+  }
 
 }
