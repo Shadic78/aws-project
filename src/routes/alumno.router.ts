@@ -1,6 +1,8 @@
 import express from 'express';
 import { AlumnoController } from '../controllers/alumno.controller';
 import { AlumnoService } from '../services/alumno.service';
+const multer  = require('multer')
+const upload = multer();
 
 export const AlumnosRouter = () => {
   const router = express.Router();
@@ -13,6 +15,7 @@ export const AlumnosRouter = () => {
   router.put('/alumnos/:id', alumnoController.editAlumno);
   router.delete('/alumnos/:id', alumnoController.deleteAlumno);
   router.delete('/alumnos', alumnoController.unsupportedMethod);
+  router.post('/alumnos/:id/fotoPerfil', upload.single('foto'), alumnoController.uploadImage);
 
   return { router };
 };

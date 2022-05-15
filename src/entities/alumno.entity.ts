@@ -17,6 +17,9 @@ export class Alumno extends BaseEntity {
   @Column()
   promedio: number;
 
+  @Column()
+  fotoPerfilUrl: string;
+
   constructor(alumno?: Partial<Alumno>) {
     super();
     Object.assign(this, alumno);

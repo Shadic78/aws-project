@@ -69,6 +69,20 @@ export class AlumnoController {
     }
   };
 
+  uploadImage = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const file = req.file;
+    try {
+      const updatedAlumno = await this.alumnoService.uploadImage(id, file);
+      return res.status(200).json(updatedAlumno);
+    } catch (error) {
+      if(error instanceof AlumnoNotFoundException) {
+        return res.status(404).json({error: error.message});
+      }
+      return res.status(400).json({message: 'Bad request'});
+    }
+  };
+
   unsupportedMethod = async (req: Request, res: Response) => {
     return res.status(405).json({error: 'Unsupported method'});
   };

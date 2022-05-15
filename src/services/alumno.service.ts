@@ -2,6 +2,7 @@ import { getCustomRepository, Repository } from 'typeorm';
 import { AlumnoRepository } from '../repositories/alumno.repository';
 import { Alumno } from '../entities/alumno.entity';
 import { AlumnoNotFoundException, AlumnoAlreadyExistsException } from '../exceptions/alumno.exceptions';
+import { uploadImage } from './storage.service';
 
 export class AlumnoService {
   private alumnosRepository: Repository<Alumno>;
@@ -40,6 +41,14 @@ export class AlumnoService {
     const alumno = await this.alumnosRepository.findOne({id});
     if(!alumno) throw new AlumnoNotFoundException(id);
     return await this.alumnosRepository.delete(alumno);
+  };
+
+  uploadImage = async (id: number, file: any) => {
+    const alumno = await this.alumnosRepository.findOne({id});
+    if(!alumno) throw new AlumnoNotFoundException(id);
+    const imageData = await uploadImage(`${id}-${file.originalname}`, file);
+    const updatedAlumno = {...alumno, fotoPerfilUrl: imageData.Location}
+    return await this.updateOne(id, updatedAlumno);
   };
 
 }
