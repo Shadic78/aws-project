@@ -29,6 +29,7 @@ export class ProfesorService {
   };
 
   updateOne = async (id: number, data: any) => {
+    if(data?.nombres == null) throw new Error();
     const profesor = await this.profesoresRepository.findOne({id});
     if(!profesor) throw new ProfesorNotFoundException(id);
     const updatedProfesor = {...profesor, ...data} as Profesor;

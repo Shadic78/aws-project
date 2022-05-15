@@ -29,9 +29,10 @@ export class AlumnoService {
   };
 
   updateOne = async (id: number, data: any) => {
+    if(data?.nombres == null) throw new Error();
     const alumno = await this.alumnosRepository.findOne({id});
     if(!alumno) throw new AlumnoNotFoundException(id);
-    const updatedAlumno = {...alumno, ...data} as Alumno;
+    const updatedAlumno = {...alumno, ...data};
     return await this.alumnosRepository.save(updatedAlumno);
   };
 
